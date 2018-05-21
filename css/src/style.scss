@@ -1,0 +1,109 @@
+$font-stack: Helvetica, sans-serif;
+$color-dark-blue: #325d88;
+$color-light-blue: #29abe0;
+$color-gray: #8e8c84;
+$color-green: #93c54b;
+$color-orange: #f47c3c;
+$color-red: #d9534f;
+
+div.wpcn-container {
+  display: table;
+  font-family: $font-stack;
+  font-size: 0.9em;
+  color: #fff;
+  padding: 30px 50px 30px 50px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+
+  &.wpcn-light-blue {
+    background-color: $color-light-blue;
+  }
+
+  &.wpcn-dark-blue {
+    background-color: $color-dark-blue;
+  }
+
+  &.wpcn-gray {
+    background-color: $color-gray;
+  }
+
+  &.wpcn-green {
+    background-color: $color-green;
+  }
+
+  &.wpcn-orange {
+    background-color: $color-orange;
+  }
+
+  &.wpcn-red {
+    background-color: $color-red;
+  }
+
+  .wpcn-message {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  button.wpcn {
+    display: table-cell;
+    color: inherit;
+    padding: 5px 15px 5px 15px;
+    border-radius: 0.25rem;
+    cursor: pointer;
+
+    &.wpcn-light-blue {
+      background-color: darken($color-light-blue, 10%);
+      border: 1px solid darken($color-light-blue, 15%);
+
+      &:hover {
+        background-color: darken($color-light-blue, 15%);
+      }
+    }
+
+    &.wpcn-dark-blue {
+      background-color: darken($color-dark-blue, 10%);
+      border: 1px solid darken($color-dark-blue, 15%);
+
+      &:hover {
+        background-color: darken($color-dark-blue, 15%);
+      }
+    }
+
+    &.wpcn-gray {
+      background-color: darken($color-gray, 10%);
+      border: 1px solid darken($color-gray, 15%);
+
+      &:hover {
+        background-color: darken($color-gray, 15%);
+      }
+    }
+
+    &.wpcn-green {
+      background-color: darken($color-green, 10%);
+      border: 1px solid darken($color-green, 15%);
+
+      &:hover {
+        background-color: darken($color-green, 15%);
+      }
+    }
+
+    &.wpcn-orange {
+      background-color: darken($color-orange, 10%);
+      border: 1px solid darken($color-orange, 15%);
+
+      &:hover {
+        background-color: darken($color-orange, 15%);
+      }
+    }
+
+    &.wpcn-red {
+      background-color: darken($color-red, 10%);
+      border: 1px solid darken($color-red, 15%);
+
+      &:hover {
+        background-color: darken($color-red, 15%);
+      }
+    }
+  }
+}
