@@ -1,0 +1,14 @@
+{
+    "name": "max/wp-cookie-notice",
+    "description": "Adds a cookie notice to a Wordpress site",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Max McMahon",
+            "email": "maxwellmcmahon@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^5.3.3 || ^7.0"
+    }
+}

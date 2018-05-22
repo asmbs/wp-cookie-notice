@@ -27,6 +27,9 @@ class WPCookieNotice
         return self::$_instance;
     }
 
+    /**
+     * Initialize all of the functionality.
+     */
     public function init(){
 
         // Add the settings menu
@@ -40,21 +43,29 @@ class WPCookieNotice
 
         // Apply action
         add_action('template_redirect', array($this, 'add_cookie_notice'));
-
     }
 
+    /**
+     * Add the CSS styles.
+     */
     function add_styles() {
         // Register the styles
         wp_register_style( 'wpcn', plugins_url( '/css/style.css', __FILE__ ) );
         wp_enqueue_style( 'wpcn' );
     }
 
+    /**
+     * Add the JS scripts.
+     */
     function add_scripts() {
         // Register the scripts
         wp_register_script( 'wpcn', plugins_url( '/js/scripts.js', __FILE__ ) );
         wp_enqueue_script( 'wpcn' );
     }
 
+    /**
+     * Add the settings page.
+     */
     function add_settings_menu() {
 
         // Register the new settings page
@@ -104,12 +115,20 @@ class WPCookieNotice
 
     }
 
+    /**
+     * Callback to create the settings section title.
+     *
+     * @param $args
+     */
     function wpcn_section_main_cb( $args ) {
-        ?>
-<!--        <p id="--><?php //echo esc_attr( $args['id'] ); ?><!--">--><?php //esc_html_e( 'Follow the white rabbit.', 'wpcn' ); ?><!--</p>-->
-        <?php
+        // No-op (no section title)
     }
 
+    /**
+     * Callback to create the "Notice Message" field on the settings page.
+     *
+     * @param $args
+     */
     function wpcn_field_message_cb( $args ) {
         // Get the value of the setting we've registered with register_setting()
         $options = get_option( 'wpcn_settings' );
@@ -130,6 +149,11 @@ class WPCookieNotice
         <?php
     }
 
+    /**
+     * Callback to create the "Color" field on the settings page.
+     *
+     * @param $args
+     */
     function wpcn_field_color_cb( $args ) {
         // Get the value of the setting we've registered with register_setting()
         $options = get_option( 'wpcn_settings' );
@@ -163,6 +187,9 @@ class WPCookieNotice
         <?php
     }
 
+    /**
+     * The HTML for the settings page.
+     */
     function wpcn_settings_page_html()
     {
         // Check user capabilities
@@ -174,12 +201,8 @@ class WPCookieNotice
             <h1><?= esc_html(get_admin_page_title()); ?></h1>
             <form action="options.php" method="post">
                 <?php
-                // output security fields for the registered setting "wporg_options"
                 settings_fields('wpcn');
-                // output setting sections and their fields
-                // (sections are registered for "wporg", each field is registered to a specific section)
                 do_settings_sections('wpcn');
-                // output save settings button
                 submit_button('Save Settings');
                 ?>
             </form>
@@ -187,7 +210,7 @@ class WPCookieNotice
         <?php
     }
 
-    // Adds the cookie notice to the page for the end-user
+    // Adds the cookie notice to all pages for the end-user
     function add_cookie_notice() {
 
         if(current_user_can('manage_options')){

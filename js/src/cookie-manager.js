@@ -1,5 +1,15 @@
+/**
+ * A simple class for managing cookies.
+ */
 export class CookieManager {
 
+    /**
+     * Creates a cookie.
+     *
+     * @param name The name of the cookie
+     * @param value The value the cookie should receive
+     * @param days How many days until the cookie should expire
+     */
     createCookie( name, value, days ) {
         let expires = null;
         if ( days ) {
@@ -12,6 +22,12 @@ export class CookieManager {
         document.cookie = name + '=' + value + expires + '; path=/';
     }
 
+    /**
+     * Reads a cookie.
+     *
+     * @param name The name of the cookie
+     * @returns {*} The value of the cookie, or null if not found
+     */
     readCookie( name ) {
         let nameEQ = name + '=';
         let ca = document.cookie.split( ';' );
@@ -27,6 +43,11 @@ export class CookieManager {
         return null;
     }
 
+    /**
+     * Erases a cookie.
+     *
+     * @param name The name of the cookie
+     */
     eraseCookie( name ) {
         createCookie( name, '', -1 );
     }
