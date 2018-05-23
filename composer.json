@@ -1,6 +1,7 @@
 {
     "name": "asmbs/wp-cookie-notice",
     "description": "Adds a cookie notice to a Wordpress site",
+    "type": "wordpress-plugin",
     "license": "MIT",
     "authors": [
         {
