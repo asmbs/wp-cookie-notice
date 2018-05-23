@@ -1,6 +1,6 @@
 {
     "name": "wp-cookie-notice",
-    "version": "0.0.1",
+    "version": "0.0.4",
     "description": "Adds a cookie notice to a Wordpress site",
     "scripts": {
         "start": "webpack --watch",
