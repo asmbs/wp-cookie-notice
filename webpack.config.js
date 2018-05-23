@@ -8,6 +8,7 @@ module.exports = {
         filename: 'scripts.js',
         path: path.resolve( __dirname, 'js' )
     },
+    mode: 'production',
     module: {
         rules: [
             // Run JS through Babel Loader before bundling it to `scripts.js`

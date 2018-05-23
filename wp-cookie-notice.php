@@ -4,7 +4,7 @@
 Plugin Name: WP Cookie Notice
 Plugin URI: https://github.com/asmbs/wp-cookie-notice
 Description: Adds a cookie notice to a Wordpress site.
-Version: 0.0.1
+Version: 0.0.4
 Author: Max McMahon
 Author URI: https://github.com/maxwellmc
 License: MIT
