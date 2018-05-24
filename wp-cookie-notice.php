@@ -4,7 +4,7 @@
 Plugin Name: WP Cookie Notice
 Plugin URI: https://github.com/asmbs/wp-cookie-notice
 Description: Adds a cookie notice to a Wordpress site.
-Version: 0.0.4
+Version: 0.0.6
 Author: Max McMahon
 Author URI: https://github.com/maxwellmc
 License: MIT
@@ -12,6 +12,9 @@ License: MIT
 
 class WPCookieNotice
 {
+    const SETTING_DEFAULT_COLOR = 'light-blue';
+    const SETTING_DEFAULT_MESSAGE = 'This website uses cookies. By using this site, you agree to allow us to collect information through cookies.';
+
     private static $_instance = null;
 
     /**
@@ -35,14 +38,30 @@ class WPCookieNotice
         // Add the settings menu
         add_action('admin_menu', array($this, 'add_settings_menu'));
 
+        // Add the "Settings" link on the Plugins page
+        $plugin = plugin_basename( __FILE__ );
+        add_filter( "plugin_action_links_$plugin", array($this, 'add_settings_link') );
+
         // Add the styles
         add_action('init', array($this, 'add_styles'));
 
         // Add the scripts
-        add_action('init', array($this, 'add_scripts'));
+        add_action('init', array($this, 'add_scripts'), 20);
 
         // Apply action
         add_action('template_redirect', array($this, 'add_cookie_notice'));
+    }
+
+    /**
+     * Add the "Settings" link on the Plugins page.
+     *
+     * @param $links
+     * @return mixed
+     */
+    function add_settings_link( $links ) {
+        $settings_link = '<a href="options-general.php?page=wp-cookie-notice">' . __( 'Settings' ) . '</a>';
+        array_unshift($links, $settings_link);
+        return $links;
     }
 
     /**
@@ -59,7 +78,7 @@ class WPCookieNotice
      */
     function add_scripts() {
         // Register the scripts
-        wp_register_script( 'wpcn', plugins_url( '/js/scripts.js', __FILE__ ) );
+        wp_register_script( 'wpcn', plugins_url( '/js/scripts.js', __FILE__ ), array( 'jquery' ), null, true );
         wp_enqueue_script( 'wpcn' );
     }
 
@@ -86,9 +105,9 @@ class WPCookieNotice
             array($this, 'wpcn_field_message_cb'),
             'wpcn',
             'wpcn_section_main',
-            [
+            array(
                 'label_for' => 'wpcn_field_message',
-            ]
+            )
         );
 
         // Add the "Color" field
@@ -98,9 +117,9 @@ class WPCookieNotice
             array($this, 'wpcn_field_color_cb'),
             'wpcn',
             'wpcn_section_main',
-            [
+            array(
                 'label_for' => 'wpcn_field_color',
-            ]
+            )
         );
 
         // Add the new settings page to the "Settings" menu
@@ -143,7 +162,7 @@ class WPCookieNotice
             if(isset($options[$args['label_for']])){
                 echo esc_attr( $options[$args['label_for']] );
             }else{
-                echo 'This website uses cookies. By using this site, you agree to allow us to collect information through cookies.';
+                echo self::SETTING_DEFAULT_MESSAGE;
             }
             ?></textarea>
         <?php
@@ -218,15 +237,11 @@ class WPCookieNotice
         }
 
         $options = get_option( 'wpcn_settings' );
-        if(isset($options['wpcn_field_color'])){
-            $color = $options['wpcn_field_color'];
-        }else{
-            $color = 'gray';
-        }
-        $message = $options['wpcn_field_message'];
+        $color = $options['wpcn_field_color'] ? $options['wpcn_field_color'] : self::SETTING_DEFAULT_COLOR;
+        $message = $options['wpcn_field_message'] ? $options['wpcn_field_message'] : self::SETTING_DEFAULT_MESSAGE;
 
         return print <<<END
-<div id="wpcn_container" class="wpcn wpcn-container wpcn-$color d-none">
+<div id="wpcn_container" class="wpcn wpcn-container wpcn-$color">
     <div id="wpcn_message" class="wpcn wpcn-message">
         $message
     </div>

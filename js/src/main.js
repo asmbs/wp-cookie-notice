@@ -44,14 +44,14 @@ export class CookieNotice {
      * Shows the cookie notice.
      */
     showNotice() {
-        this.noticeContainer.removeClass( 'd-none' );
+        this.noticeContainer.css( 'display', 'table' );
     }
 
     /**
      * Hides the cookie notice.
      */
     hideNotice() {
-        this.noticeContainer.addClass( 'd-none' );
+        this.noticeContainer.css( 'display', 'none' );
     }
 
     /**
