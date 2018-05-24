@@ -12,6 +12,9 @@ License: MIT
 
 class WPCookieNotice
 {
+    const SETTING_DEFAULT_COLOR = 'light-blue';
+    const SETTING_DEFAULT_MESSAGE = 'This website uses cookies. By using this site, you agree to allow us to collect information through cookies.';
+
     private static $_instance = null;
 
     /**
@@ -86,9 +89,9 @@ class WPCookieNotice
             array($this, 'wpcn_field_message_cb'),
             'wpcn',
             'wpcn_section_main',
-            [
+            array(
                 'label_for' => 'wpcn_field_message',
-            ]
+            )
         );
 
         // Add the "Color" field
@@ -98,9 +101,9 @@ class WPCookieNotice
             array($this, 'wpcn_field_color_cb'),
             'wpcn',
             'wpcn_section_main',
-            [
+            array(
                 'label_for' => 'wpcn_field_color',
-            ]
+            )
         );
 
         // Add the new settings page to the "Settings" menu
@@ -143,7 +146,7 @@ class WPCookieNotice
             if(isset($options[$args['label_for']])){
                 echo esc_attr( $options[$args['label_for']] );
             }else{
-                echo 'This website uses cookies. By using this site, you agree to allow us to collect information through cookies.';
+                echo self::SETTING_DEFAULT_MESSAGE;
             }
             ?></textarea>
         <?php
@@ -218,12 +221,8 @@ class WPCookieNotice
         }
 
         $options = get_option( 'wpcn_settings' );
-        if(isset($options['wpcn_field_color'])){
-            $color = $options['wpcn_field_color'];
-        }else{
-            $color = 'gray';
-        }
-        $message = $options['wpcn_field_message'];
+        $color = $options['wpcn_field_color'] ? $options['wpcn_field_color'] : self::SETTING_DEFAULT_COLOR;
+        $message = $options['wpcn_field_message'] ? $options['wpcn_field_message'] : self::SETTING_DEFAULT_MESSAGE;
 
         return print <<<END
 <div id="wpcn_container" class="wpcn wpcn-container wpcn-$color d-none">
