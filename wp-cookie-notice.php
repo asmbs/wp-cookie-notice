@@ -38,6 +38,10 @@ class WPCookieNotice
         // Add the settings menu
         add_action('admin_menu', array($this, 'add_settings_menu'));
 
+        // Add the "Settings" link on the Plugins page
+        $plugin = plugin_basename( __FILE__ );
+        add_filter( "plugin_action_links_$plugin", array($this, 'add_settings_link') );
+
         // Add the styles
         add_action('init', array($this, 'add_styles'));
 
@@ -46,6 +50,18 @@ class WPCookieNotice
 
         // Apply action
         add_action('template_redirect', array($this, 'add_cookie_notice'));
+    }
+
+    /**
+     * Add the "Settings" link on the Plugins page.
+     *
+     * @param $links
+     * @return mixed
+     */
+    function add_settings_link( $links ) {
+        $settings_link = '<a href="options-general.php?page=wp-cookie-notice">' . __( 'Settings' ) . '</a>';
+        array_unshift($links, $settings_link);
+        return $links;
     }
 
     /**
