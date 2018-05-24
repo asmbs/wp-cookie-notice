@@ -241,7 +241,7 @@ class WPCookieNotice
         $message = $options['wpcn_field_message'] ? $options['wpcn_field_message'] : self::SETTING_DEFAULT_MESSAGE;
 
         return print <<<END
-<div id="wpcn_container" class="wpcn wpcn-container wpcn-$color d-none">
+<div id="wpcn_container" class="wpcn wpcn-container wpcn-$color">
     <div id="wpcn_message" class="wpcn wpcn-message">
         $message
     </div>
