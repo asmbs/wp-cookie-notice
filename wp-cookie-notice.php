@@ -46,7 +46,7 @@ class WPCookieNotice
         add_action('init', array($this, 'add_styles'));
 
         // Add the scripts
-        add_action('init', array($this, 'add_scripts'));
+        add_action('init', array($this, 'add_scripts'), 20);
 
         // Apply action
         add_action('template_redirect', array($this, 'add_cookie_notice'));
@@ -78,7 +78,7 @@ class WPCookieNotice
      */
     function add_scripts() {
         // Register the scripts
-        wp_register_script( 'wpcn', plugins_url( '/js/scripts.js', __FILE__ ) );
+        wp_register_script( 'wpcn', plugins_url( '/js/scripts.js', __FILE__ ), array( 'jquery' ), null, true );
         wp_enqueue_script( 'wpcn' );
     }
 
