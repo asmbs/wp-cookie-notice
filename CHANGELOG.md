@@ -3,9 +3,11 @@
 ### 0.0.6
 
 - Remove dependency on Bootstrap v4.
+- Switch to using Wordpress's jQuery.
 - Improve installation and development documentation.
 - Force a default message to be shown even when one is not set by the administrator.
 - Add a "Settings" link to the Plugins page listing.
+- Fix the notice being obstructed in some cases.
 
 ### 0.0.5
 

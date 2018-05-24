@@ -15,6 +15,7 @@ div.wpcn-container {
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 5000;
 
   &.wpcn-light-blue {
     background-color: $color-light-blue;
