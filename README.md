@@ -1,3 +1,5 @@
+## As of March 9, 2019, this project has been abandoned. Please use another package such as [Cookie Notice for GDPR by dFactory](https://wordpress.org/plugins/cookie-notice/).
+
 # WP Cookie Notice
 
 This is a Wordpress plugin that adds a cookie notice. The notice is shown on every page until the user clicks the "Accept" button. This plugin uses implicit consent, meaning that it does not prevent any use of cookies before the user accepts. The notice message and the color scheme can be changed in the settings page, and further customization can be accomplished in your theme with the use of the `wpcn` classes.
